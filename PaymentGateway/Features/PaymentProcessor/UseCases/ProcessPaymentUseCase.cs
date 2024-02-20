@@ -19,7 +19,7 @@ namespace Application.Features.PaymentProcessor.UseCases
 
         public async Task<Result<ProcessPaymentResult>> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
         {
-            var result = await _repository.ProcessPaymentAsync(request.CardNumber, request.ExpiryMonth, request.ExpiryYear, request.Cvv, request.Name, cancellationToken);
+            var result = await _repository.ProcessPaymentAsync(request.CardNumber, request.ExpiryMonth, request.ExpiryYear, request.Amount, request.Currency, request.Cvv, request.Name, cancellationToken);
             if (result.IsSuccess)
             {
                 var notification = new PaymentRequestNotification(result.Value!.TransactionId, result.Value.Status, request.CardNumber, DateTimeOffset.Now, request.Amount, request.Currency);

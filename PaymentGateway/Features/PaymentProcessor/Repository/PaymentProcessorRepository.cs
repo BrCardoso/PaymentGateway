@@ -1,5 +1,4 @@
-﻿using Application.Features.GetPaymentDetails.Models;
-using Application.Features.PaymentProcessor.Models;
+﻿using Application.Features.PaymentProcessor.Models;
 using Application.Shared.AcquiringBank;
 using Application.Shared.Models;
 using Newtonsoft.Json;
@@ -17,11 +16,11 @@ namespace Application.Features.PaymentProcessor.Repository
             _acquiringBankApi = acquiringBankApi;
         }
 
-        public async Task<Result<ProcessPaymentResult>> ProcessPaymentAsync(string cardNumber, int expMonth, int expYear, string cvvCode, string name, CancellationToken cancellationToken)
+        public async Task<Result<ProcessPaymentResult>> ProcessPaymentAsync(string cardNumber, int expMonth, int expYear, float amount, string currency, string cvvCode, string name, CancellationToken cancellationToken)
         {
             var token = await _acquiringBankApi.GetAuthorizationTokenAsync(cancellationToken);
 
-            var data = new { CardNumber = cardNumber, ExpMonth = expMonth, ExpYear = expYear, CvvCode = cvvCode, Name = name };
+            var data = new { CardNumber = cardNumber, ExpMonth = expMonth, ExpYear = expYear, CvvCode = cvvCode, Amount = amount, Currency = currency, Name = name };
             var json = JsonConvert.SerializeObject(data);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
