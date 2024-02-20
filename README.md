@@ -59,3 +59,5 @@ Both `AcquiringBankSimulator` and `PaymentGateway.Api` should be started
 ```
 Returns 200
 
+### To check transaction update
+Repeat the steps on `Get payment request info`
