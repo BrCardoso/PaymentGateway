@@ -61,3 +61,4 @@ Returns 200
 
 ### To check transaction update
 Repeat the steps on `Get payment request info`
+![App Screenshot](Screenshot3.png)
