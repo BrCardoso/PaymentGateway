@@ -17,9 +17,10 @@ namespace Application.Features.PaymentResultNotifications.UseCases
 
         public async Task Handle(PaymentResultNotification notification, CancellationToken cancellationToken)
         {
-            var cachedTransaction = JsonConvert.DeserializeObject<PaymentDetails>(_storageService.Get<string>(notification.TransactionId));
+            var a = await _storageService.Get<string>(notification.TransactionId);
+            var cachedTransaction = JsonConvert.DeserializeObject<PaymentDetails>(a);
             var updatedTransaction = new PaymentDetails(notification.TransactionId, notification.Status, cachedTransaction.CardNumber, cachedTransaction.Date, cachedTransaction.Amount, cachedTransaction.Currency);
-            _storageService.Set(notification.TransactionId, JsonConvert.SerializeObject(updatedTransaction));
+            await _storageService.Set(notification.TransactionId, updatedTransaction);
             return;
         }
     }

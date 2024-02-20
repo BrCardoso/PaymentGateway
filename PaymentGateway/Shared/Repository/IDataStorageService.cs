@@ -3,7 +3,7 @@ namespace Application.Shared.Repository
 {
     public interface IDataStorageService
     {
-        T Get<T>(Guid id);
-        string Set(Guid id, string value);
+        Task<T> Get<T>(Guid id);
+        Task<bool> Set<T>(Guid id, T value);
     }
 }

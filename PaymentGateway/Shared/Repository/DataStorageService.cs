@@ -12,13 +12,16 @@ namespace Application.Shared.Repository
             _memoryCache = memoryCache;
         }
 
-        public T Get<T>(Guid id)
+        public Task<T> Get<T>(Guid id)
         {
             var result = _memoryCache.Get<string>(id);
-            return JsonConvert.DeserializeObject<T>(result);
+            return Task.FromResult(JsonConvert.DeserializeObject<T>(result));
         }
 
-        public string Set(Guid id, string value) =>
-            _memoryCache.Set(id, value);
+        public Task<bool> Set<T>(Guid id, T value)
+        {
+            _memoryCache.Set(id, JsonConvert.SerializeObject(value));
+            return Task.FromResult(true);
+        }
     }
 }

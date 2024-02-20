@@ -14,10 +14,25 @@ namespace Application.Features.ListPayments.UseCases
             _storageService = storageService;
         }
 
-        public Task<Result<PaymentsResult>> Handle(GetPaymentsCommand request, CancellationToken cancellationToken)
+        public async Task<Result<PaymentsResult>> Handle(GetPaymentsCommand request, CancellationToken cancellationToken)
         {
-            var result = _storageService.Get<PaymentsResult>(request.TransactionId);
-            return Task.FromResult(new Result<PaymentsResult>(result));
+            try
+            {
+                var result = await _storageService.Get<PaymentsResult>(request.TransactionId);
+                result.CardNumber = Mask(result.CardNumber);
+                return new Result<PaymentsResult>(result);
+            }
+            catch
+            {
+                return new Result<PaymentsResult>("Not found", "Error trying to retrieve transaction");
+            }            
+        }
+        public static string Mask(string data)
+        {
+            var lastDigits = data.Substring(data.Length - 4, 4);
+            var mask = new string('X', data.Length - 4);
+
+            return string.Concat(mask, lastDigits);
         }
     }
 }
