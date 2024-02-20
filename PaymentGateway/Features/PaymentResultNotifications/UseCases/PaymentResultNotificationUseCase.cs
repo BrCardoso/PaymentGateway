@@ -2,7 +2,6 @@
 using Application.Shared.Models;
 using Application.Shared.Repository;
 using MediatR;
-using Newtonsoft.Json;
 
 namespace Application.Features.PaymentResultNotifications.UseCases
 {
@@ -17,8 +16,7 @@ namespace Application.Features.PaymentResultNotifications.UseCases
 
         public async Task Handle(PaymentResultNotification notification, CancellationToken cancellationToken)
         {
-            var a = await _storageService.Get<string>(notification.TransactionId);
-            var cachedTransaction = JsonConvert.DeserializeObject<PaymentDetails>(a);
+            var cachedTransaction = await _storageService.Get<PaymentDetails>(notification.TransactionId);
             var updatedTransaction = new PaymentDetails(notification.TransactionId, notification.Status, cachedTransaction.CardNumber, cachedTransaction.Date, cachedTransaction.Amount, cachedTransaction.Currency);
             await _storageService.Set(notification.TransactionId, updatedTransaction);
             return;

@@ -1,7 +1,6 @@
 ﻿using Application.Features.PaymentRequestNotifications.Models;
 using Application.Shared.Repository;
 using MediatR;
-using Newtonsoft.Json;
 
 namespace Application.Features.PaymentRequestNotifications.UseCases
 {
@@ -16,7 +15,7 @@ namespace Application.Features.PaymentRequestNotifications.UseCases
 
         public Task Handle(PaymentRequestNotification notification, CancellationToken cancellationToken)
         {
-            _storageService.Set(notification.TransactionId, JsonConvert.SerializeObject(notification));
+            _storageService.Set(notification.TransactionId, notification);
             return Task.CompletedTask;
         }
     }
