@@ -9,13 +9,22 @@
 
 ### Assumptions
 - User is already autenticated by a layer of security and I'm handling transactions only
+- The payment process request is asynchronous and the client will get the callback to display the error or success of that transaction
 
-### With more time
+### Areas for improvement
 Things I would improve if I had more time
 - Integration tests
 - Treat exceptions on validation
 - Minimal api
 - Different storage
+- Use of queues to handle the data to be stored in the database
+
+### What cloud technologies you’d use and why
+- Database: I would use a SQL database to have relational and typed schema to keep track of transactions and transactions updates (SQL Server)
+- Docker + kubernets so we could manage the pods to scale only when needed
+- Events to handle the transactions so we could have retry policies and not loose data in case of communication error with the bank and a way to manage the data to be persisted in the DB without holding the request (Sugested design)
+
+![App Screenshot](Screenshot4.png)
 
 ### Documentation
 - Swagger
