@@ -47,7 +47,7 @@ Both `AcquiringBankSimulator` and `PaymentGateway.Api` should be started
 ```bash
   GET https://localhost:7035/Payments/{TransactionId}
 ```
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Screenshot2.png)
 
 ### Update payment request status
 ```bash

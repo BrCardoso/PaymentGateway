@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "PaymentGatew
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution files", "{8673A186-A138-4973-9124-4B7151D1CFDB}"
 	ProjectSection(SolutionItems) = preProject
-		Solution files\README.md = Solution files\README.md
+		README.md = README.md
 		Solution files\Screenshot1.png = Solution files\Screenshot1.png
 	EndProjectSection
 EndProject
